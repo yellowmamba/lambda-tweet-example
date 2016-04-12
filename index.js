@@ -17,7 +17,9 @@ exports.handler = function (event, context) {
             html = data.Body.toString();
             $ = cheerio.load(html);
             title = $('title').text();
-
+            
+            // if your site uses a custom domain, e.g. example.com, you can ignore the "s3.amazonaws.com" part
+            // as your bucket name would need to be the domain name itself.
             var link = 'https://s3.amazonaws.com/' + s3Event.bucket.name + '/' + s3Event.object.key;
             
             var Twitter = require('twitter');
